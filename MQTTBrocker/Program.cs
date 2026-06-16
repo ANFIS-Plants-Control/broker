@@ -1,6 +1,7 @@
 ﻿using MQTTnet.Protocol;
 using MQTTnet.Server;
 using System.Net;
+using System.Text;
 
 namespace MQTTBroker
 {
@@ -28,6 +29,8 @@ namespace MQTTBroker
             {
                 Console.WriteLine(e.ApplicationMessage);
                 Console.WriteLine(e.ApplicationMessage.Payload);
+                var payload = Encoding.UTF8.GetString(e.ApplicationMessage.Payload);
+                Console.WriteLine(payload);
                 return Task.CompletedTask;
             };
             mqttServer.ClientConnectedAsync += e =>
